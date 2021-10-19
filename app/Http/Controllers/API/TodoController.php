@@ -46,6 +46,10 @@ class TodoController extends Controller
     public function show($id)
     {
         //
+        $todo = Todo::findOrFail($id);
+        return response(['todo' => $todo], Response::HTTP_OK);
+
+
     }
 
     /**
@@ -58,6 +62,9 @@ class TodoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $todo = Todo::findOrFail($id);
+        $todo->update($request->all());
+        return response($todo, Response::HTTP_OK);
     }
 
     /**
@@ -69,5 +76,7 @@ class TodoController extends Controller
     public function destroy($id)
     {
         //
+        $todo = Todo::findOrFail($id);
+        $todo->delete();
     }
 }
